@@ -3,7 +3,8 @@
 # include <iostream>
 # include <string>
 
-class Contact {
+class Contact
+{
 public: 
 	int getId() const;
 	void setId(int id);

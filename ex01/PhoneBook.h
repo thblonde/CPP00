@@ -4,12 +4,13 @@
 # include <string>
 # include "Contact.h"
 
-class PhoneBook {
+class PhoneBook
+{
 public: 
-	void add_contact(int &index);
-	void ask_info(int &index);
-	void search_contact();
-	void print_saved_contact();
+	void addContact(int &index);
+	void askInfo(int &index);
+	void searchContact();
+	void printSavedContact();
 
 private: 
 	Contact _contact[8];

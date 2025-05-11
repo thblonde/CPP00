@@ -4,16 +4,17 @@ int main()
 {
     PhoneBook instance;
     std::string input;
-    static int index(0);
+    static int index = 0;
     
-    while (1) {
+    while (1)
+    {
         std::cout << "Enter a command: ";
         std::cin >> input;
         std::cout << std::endl;
         if (input == "ADD")
-            instance.add_contact(index);
+            instance.addContact(index);
         else if (input == "SEARCH")
-            instance.search_contact();
+            instance.searchContact();
         else if (input == "EXIT")
             break;
     }
