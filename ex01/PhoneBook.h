@@ -2,18 +2,19 @@
 # define PHONEBOOK_H
 # include <iostream>
 # include <string>
+# include <cstdlib>
 # include "Contact.h"
 
 class PhoneBook
 {
-public: 
-	void addContact(int &index);
-	void askInfo(int &index);
-	void searchContact();
-	void printSavedContact();
+    public: 
+        void addContact(int &index);
+        void askInfo(int &index);
+        void searchContact();
+        void printSavedContact();
 
-private: 
-	Contact _contact[8];
+    private: 
+        Contact _contact[8];
 };
 
 #endif
