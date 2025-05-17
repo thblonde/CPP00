@@ -8,9 +8,9 @@
 class PhoneBook
 {
     public: 
-        void addContact(int &index);
-        void askInfo(int &index);
-        void searchContact();
+        bool addContact(int &index);
+        bool askInfo(int &index);
+        bool searchContact();
         void printSavedContact();
 
     private: 

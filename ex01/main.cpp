@@ -6,18 +6,24 @@ int main()
 	std::string input;
 	static int index = 0;
 
-	while (1)
+	while (true)
 	{
 		std::cout << "Enter a command: ";
-		std::getline(std::cin, input);
-		if (std::cin.eof())
-			break;
-
+	    std::getline(std::cin, input);
+        if (std::cin.eof())
+           break;
 		if (input == "ADD")
-			instance.addContact(index);
+		{
+			if (!instance.addContact(index))
+				break;
+		}
 		else if (input == "SEARCH")
-			instance.searchContact();
+        {
+    		if (!instance.searchContact())
+                    break;
+        }
 		else if (input == "EXIT")
 			break;
+        std::cin.clear();
 	}
 }

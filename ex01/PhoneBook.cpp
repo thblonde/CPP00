@@ -1,65 +1,72 @@
 #include "PhoneBook.h"
 
-void PhoneBook::askInfo(int& index)
+bool PhoneBook::askInfo(int& index)
 {
-	std::string input;
-    std::cout << std::endl;
-
-    while (1)
+    std::string input;
+    while (true)
     {
-        std::cout << "First Name: ";
+        std::cout << "First name: ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+            return false;
         if (!input.empty())
         {
             _contact[index].setFirstName(input);
             break;
         }
     }
-    while (1)
+    while (true)
     {
-        std::cout << "Last Name: ";
+        std::cout << "Last name: ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+            return false;
         if (!input.empty())
         {
             _contact[index].setLastName(input);
             break;
         }
     }
-    while (1)
+    while (true)
     {
-        std::cout << "Nick Name: ";
+        std::cout << "Nick name: ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+            return false;
         if (!input.empty())
         {
             _contact[index].setNickName(input);
             break;
         }
     }
-    while (1)
+    while (true)
     {
         std::cout << "Number: ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+            return false;
         if (!input.empty())
         {
             _contact[index].setNumber(input);
             break;
         }
     }
-    while (1)
+    while (true)
     {
         std::cout << "Secret: ";
         std::getline(std::cin, input);
+        if (std::cin.eof())
+            return false;
         if (!input.empty())
         {
             _contact[index].setSecret(input);
             break;
         }
     }
-    std::cout << std::endl;
+    return true;
 }
 
-
-void PhoneBook::addContact(int& index)
+bool PhoneBook::addContact(int& index)
 {
     int i = 0;
 
@@ -68,15 +75,17 @@ void PhoneBook::addContact(int& index)
         if (_contact[i].getFirstName().empty())
         {
             index = i;
-            askInfo(index);
-            return;
+            if (!askInfo(index))
+                return false;
+            return true;
         }
         i++;
     }
     if (++index == 8)
         index = 0;
-
-    askInfo(index);
+    if (!askInfo(index))
+        return false;
+    return true;
 }
 
 void PhoneBook::printSavedContact()
@@ -93,11 +102,11 @@ void PhoneBook::printSavedContact()
 		if (len >= 10)
         {
             std::string tmp = _contact[i].getFirstName();
-			std::cout << tmp.replace(10, len  - 10, ".") << '|';
+			std::cout << tmp.replace(9, len  - 9, ".") << '|';
 		}	
 		else
         {
-			for (int i = 0; i <= 10 - len; i++)
+			for (int i = 0; i <= 9 - len; i++)
 				std::cout << ' ';
 			std::cout << _contact[i].getFirstName() << '|';
 		}
@@ -105,11 +114,11 @@ void PhoneBook::printSavedContact()
 		if (len >= 10)
         {
             std::string tmp = _contact[i].getLastName();
-			std::cout << tmp.replace(10, len  - 10, ".") << '|';
+			std::cout << tmp.replace(9, len  - 9, ".") << '|';
 		}	
 		else
         {
-			for (int i = 0; i <= 10 - len; i++)
+			for (int i = 0; i <= 9 - len; i++)
 				std::cout << ' ';
 			std::cout << _contact[i].getLastName()<< '|';
 		}
@@ -117,11 +126,11 @@ void PhoneBook::printSavedContact()
 		if (len >= 10)
         {
             std::string tmp = _contact[i].getNickName();
-			std::cout << tmp.replace(10, len  - 10, ".");
+			std::cout << tmp.replace(9, len  - 9, ".");
 		}	
 		else
         {
-			for (int i = 0; i <= 10 - len; i++)
+			for (int i = 0; i <= 9 - len; i++)
 				std::cout << ' ';
 			std::cout << _contact[i].getNickName();
 		}	
@@ -131,15 +140,21 @@ void PhoneBook::printSavedContact()
     std::cout << std::endl;
 }
 
-void PhoneBook::searchContact()
+bool PhoneBook::searchContact()
 {
     std::string input_index_str;
     int i = 1;
 
     printSavedContact();
-
-    std::cout << "Enter the contact index: ";
-    std::getline(std::cin, input_index_str);
+    while (1)
+    {
+        std::cout << "Enter the contact index: ";
+        std::getline(std::cin, input_index_str);
+        if (std::cin.eof())
+            return false;
+        if (!input_index_str.empty())
+            break;
+    }
     std::cout << std::endl;
 
     int input_index_int = atoi(input_index_str.c_str());
@@ -147,7 +162,7 @@ void PhoneBook::searchContact()
     if (input_index_int < 1 || input_index_int > 8 || _contact[input_index_int - 1].getFirstName().empty())
     {
         std::cout << "\t" << "*Contact is empty*" << std::endl << std::endl;
-        return ;
+        return false;
     }
 
     while (i <= 8)
@@ -163,4 +178,5 @@ void PhoneBook::searchContact()
         }
         i++;
     }
+    return true;
 }
