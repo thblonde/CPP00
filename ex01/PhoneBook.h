@@ -5,14 +5,12 @@
 # include <cstdlib>
 # include "Contact.h"
 
-class PhoneBook
-{
+class PhoneBook {
     public: 
         bool addContact(int &index);
         bool askInfo(int &index);
         bool searchContact();
         void printSavedContact();
-
     private: 
         Contact _contact[8];
 };

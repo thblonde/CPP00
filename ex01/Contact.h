@@ -3,8 +3,7 @@
 # include <iostream>
 # include <string>
 
-class Contact
-{
+class Contact {
     public: 
         int getId() const;
         void setId(int id);
@@ -18,7 +17,6 @@ class Contact
         void setNumber(std::string number);
         std::string getSecret() const;
         void setSecret(std::string secret);
-	
     private: 
         int _id;
         std::string _first_name;
